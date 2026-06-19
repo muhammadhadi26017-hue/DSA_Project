@@ -7,14 +7,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-
 public class HUDPanel extends JPanel {
 
     private static final int GUN_IMG_W = 220;
     private static final int GUN_IMG_H = 80;
 
     private final JLabel roundLabel;
-    private final JLabel gunImageLabel;   // shows gun JPG
+    private final JLabel gunImageLabel;   
     private final JLabel gunNameLabel;
     private final JLabel chamberLabel;
     private final JLabel probLabel;
@@ -29,7 +28,6 @@ public class HUDPanel extends JPanel {
                                 Theme.PADDING_MD, Theme.PADDING_LG)
         ));
         setLayout(new BorderLayout(0, 0));
-
 
         roundLabel = new JLabel("ROUND  1", SwingConstants.CENTER);
         roundLabel.setFont(Theme.FONT_MONO_MEDIUM);
@@ -46,7 +44,6 @@ public class HUDPanel extends JPanel {
         leftWrap.add(roundLabel);
         add(leftWrap, BorderLayout.WEST);
 
-
         gunImageLabel = new JLabel();
         gunImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gunImageLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -62,7 +59,6 @@ public class HUDPanel extends JPanel {
         probLabel = new JLabel("", SwingConstants.CENTER);
         probLabel.setFont(Theme.FONT_MONO_SMALL);
         probLabel.setForeground(Theme.TEXT_DISABLED);
-
 
         JPanel gunTextCol = new JPanel();
         gunTextCol.setOpaque(false);
@@ -98,7 +94,6 @@ public class HUDPanel extends JPanel {
     public void update(GameState state) {
         roundLabel.setText("ROUND  " + state.getCurrentRound()
                            + " / " + state.getMode().getRoundsToWin());
-
 
         if (state.getMode() != lastMode) {
             lastMode = state.getMode();

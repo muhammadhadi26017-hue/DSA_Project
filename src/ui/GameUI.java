@@ -8,7 +8,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class GameUI extends JFrame {
 
     private final HUDPanel   hudPanel;
@@ -37,12 +36,11 @@ public class GameUI extends JFrame {
         root.add(hudPanel,   BorderLayout.NORTH);
         root.add(tablePanel, BorderLayout.CENTER);
 
-        setMinimumSize(new Dimension(760, 560));
+        setMinimumSize(new Dimension(820, 600));
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
 
     public void refresh(GameState state) {
         SwingUtilities.invokeLater(() -> {
@@ -102,13 +100,10 @@ public class GameUI extends JFrame {
 
     public TablePanel getTablePanel() { return tablePanel; }
 
-
-
     private GameState buildDummyState(GameMode mode) {
         Player human = new Player("PLAYER", false, mode.getStartingCharges());
         Player ai    = new Player("DEALER", true,  mode.getStartingCharges());
 
-        // Give human a couple of demo items so item boxes render
         human.addItem(Item.BEER);
         human.addItem(Item.MAGNIFYING_GLASS);
         ai.addItem(Item.HANDCUFFS);

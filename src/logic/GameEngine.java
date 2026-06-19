@@ -12,13 +12,11 @@ import ui.ModeSelectDialog;
 import javax.swing.*;
 import java.util.Map;
 
-
 public class GameEngine {
 
     private final GameUI    ui;
     private final GameState state;
     private final AIPlayer  ai;
-
 
     private static final int AI_DELAY_MS = 900;
 
@@ -33,10 +31,8 @@ public class GameEngine {
         this.state = new GameState(mode, human, aiPlayer, gun);
     }
 
-
-
     public void startGame() {
-
+        
         ui.setOnShootOpponent(this::humanShootsOpponent);
         ui.setOnShootSelf(this::humanShootsSelf);
         ui.getTablePanel().setOnItemUsed(this::humanUsesItem);
@@ -44,24 +40,19 @@ public class GameEngine {
         startRound();
     }
 
-
-
     private void startRound() {
-
+        
         state.getHuman().resetForNewRound(state.getMode().getStartingCharges());
         state.getAI().resetForNewRound(state.getMode().getStartingCharges());
-
 
         Map<Integer, BulletType> knownSlots = GunLoader.load(state.getGun(), state.getMode());
         ai.setKnownSlots(knownSlots);
 
-
         GunLoader.dealItems(state.getHuman(), state.getMode());
         GunLoader.dealItems(state.getAI(),    state.getMode());
 
-
-        state.getHuman();
-
+        state.getHuman(); 
+        
         forceHumanTurn();
 
         ui.refresh(state);
@@ -69,13 +60,12 @@ public class GameEngine {
     }
 
     private void forceHumanTurn() {
-
+        
         while (!state.isHumanTurn()) state.switchTurn();
     }
 
     private void startTurn() {
         Player current = state.getCurrentTurnPlayer();
-
 
         if (current.isSkipNextTurn()) {
             current.setSkipNextTurn(false);
@@ -99,9 +89,8 @@ public class GameEngine {
         if (!state.isHumanTurn()) {
             runAITurn();
         }
-
+        
     }
-
 
     private void reloadGun() {
         Map<Integer, BulletType> knownSlots = GunLoader.load(state.getGun(), state.getMode());
@@ -113,8 +102,6 @@ public class GameEngine {
             startTurn();
         });
     }
-
-
 
     public void humanShootsOpponent() {
         if (!state.isHumanTurn()) return;
@@ -132,32 +119,27 @@ public class GameEngine {
 
         String msg = ItemEffect.apply(item, state.getHuman(), state);
 
-
         ui.showResult(msg, false);
         ui.refresh(state);
-
 
         if (state.getGun().isEmpty()) {
             pause(700, this::reloadGun);
         }
-
+        
     }
-
-
 
     private void runAITurn() {
         new SwingWorker<Void, String>() {
 
             @Override
             protected Void doInBackground() throws Exception {
-
+                
                 Item itemToUse;
                 while ((itemToUse = ai.decideItem(state)) != null) {
                     final Item chosen = itemToUse;
                     Thread.sleep(AI_DELAY_MS);
 
                     final String msg = ItemEffect.apply(chosen, state.getAI(), state);
-
 
                     if (chosen == Item.MAGNIFYING_GLASS) {
                         BulletType cur = state.getGun().peekCurrent();
@@ -172,7 +154,6 @@ public class GameEngine {
                     publish(msg);
                     Thread.sleep(600);
                 }
-
 
                 Thread.sleep(AI_DELAY_MS);
                 boolean shootSelf = ai.decideShootSelf(state);
@@ -199,7 +180,6 @@ public class GameEngine {
         }.execute();
     }
 
-
     private void resolveShot(Player shooter, Player target) {
         BulletType bullet = state.getGun().fire();
         state.setLastFiredBullet(bullet);
@@ -222,25 +202,25 @@ public class GameEngine {
                 if (!target.isAlive()) {
                     handlePlayerDead(target);
                 } else {
-                    // Turn always switches after a LIVE round (regardless of self/opponent)
+                    
                     state.switchTurn();
                     ui.refresh(state);
                     startTurn();
                 }
             });
 
-        } else { // BLANK
+        } else { 
             state.setDoubleDamage(false);
             if (selfShot) {
-
+                
                 ui.showResult(shooter.getName() + " — BLANK. Take another turn!", false);
                 pause(1000, () -> {
                     ui.clearResult();
                     ui.refresh(state);
-                    startTurn(); // same player goes again
+                    startTurn(); 
                 });
             } else {
-
+                
                 ui.showResult("BLANK — no damage.", false);
                 pause(900, () -> {
                     ui.clearResult();
@@ -252,8 +232,6 @@ public class GameEngine {
         }
     }
 
-
-
     private void handlePlayerDead(Player loser) {
         Player winner = state.getOpponent(loser);
         winner.addRoundWin();
@@ -262,6 +240,7 @@ public class GameEngine {
         if (state.checkGameOver()) {
             handleGameOver();
         } else {
+            
             String body = winner.getName() + " wins round " + state.getCurrentRound() + "!\n\n"
                         + "Score:  PLAYER " + state.getHuman().getRoundsWon()
                         + "  vs  " + state.getAI().getRoundsWon() + "  DEALER";
@@ -281,10 +260,10 @@ public class GameEngine {
 
         int choice = ui.showEventDialog(title, body, new String[]{"Play Again", "Quit"});
         if (choice == 0) {
-
+            
             state.getHuman().resetForNewRound(state.getMode().getStartingCharges());
             state.getAI().resetForNewRound(state.getMode().getStartingCharges());
-
+            
             restartGame();
         } else {
             System.exit(0);
@@ -300,8 +279,6 @@ public class GameEngine {
             new GameEngine(mode, newUI).startGame();
         });
     }
-
-
 
     private void pause(int delayMs, Runnable action) {
         Timer t = new Timer(delayMs, e -> action.run());

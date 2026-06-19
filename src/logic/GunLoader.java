@@ -17,7 +17,6 @@ public class GunLoader {
 
     private GunLoader() {}
 
-
     public static Map<Integer, BulletType> load(Gun gun, GameMode mode) {
         Random rng = new Random();
 
@@ -33,7 +32,6 @@ public class GunLoader {
         Map<Integer, BulletType> knownSlots = new HashMap<>();
         int knownCount = mode.getAiKnownPositions();
         if (knownCount == 0) return knownSlots;
-
 
         List<Integer> liveIndices = new ArrayList<>();
         for (int i = 0; i < bullets.size(); i++)
@@ -57,7 +55,6 @@ public class GunLoader {
 
         return knownSlots;
     }
-
 
     public static void dealItems(Player player, GameMode mode) {
         List<Item> pool = new ArrayList<>(List.of(Item.values()));

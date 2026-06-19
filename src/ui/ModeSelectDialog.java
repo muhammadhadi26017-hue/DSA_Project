@@ -8,13 +8,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 public class ModeSelectDialog extends JDialog {
 
     private GameMode selectedMode = null;
 
     public ModeSelectDialog(Frame parent) {
-        super(parent, "Russian Roulette", true); // modal
+        super(parent, "Russian Roulette", true); 
         setUndecorated(false);
         getContentPane().setBackground(Theme.BG_DEEP);
         setLayout(new BorderLayout());
@@ -25,7 +24,6 @@ public class ModeSelectDialog extends JDialog {
         root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
         root.setBorder(new EmptyBorder(40, 60, 40, 60));
 
-        // Title
         JLabel title = new JLabel("RUSSIAN  ROULETTE", SwingConstants.CENTER);
         title.setFont(new Font("Courier New", Font.BOLD, 28));
         title.setForeground(Theme.AMBER);
@@ -42,7 +40,6 @@ public class ModeSelectDialog extends JDialog {
 
         root.add(Box.createVerticalStrut(36));
 
-        // Mode buttons
         for (GameMode mode : GameMode.values()) {
             JPanel card = buildModeCard(mode);
             card.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -79,7 +76,6 @@ public class ModeSelectDialog extends JDialog {
         card.setMaximumSize(new Dimension(360, 80));
         card.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        // Left: mode name + gun
         JPanel leftBlock = new JPanel();
         leftBlock.setOpaque(false);
         leftBlock.setLayout(new BoxLayout(leftBlock, BoxLayout.Y_AXIS));
@@ -96,7 +92,6 @@ public class ModeSelectDialog extends JDialog {
 
         card.add(leftBlock, BorderLayout.WEST);
 
-        // Right: stats summary
         JPanel rightBlock = new JPanel();
         rightBlock.setOpaque(false);
         rightBlock.setLayout(new BoxLayout(rightBlock, BoxLayout.Y_AXIS));
@@ -118,7 +113,6 @@ public class ModeSelectDialog extends JDialog {
         rightBlock.add(s2);
         card.add(rightBlock, BorderLayout.EAST);
 
-        // Hover + click
         card.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -154,7 +148,6 @@ public class ModeSelectDialog extends JDialog {
             case HARD   -> Theme.RED_HOT;
         };
     }
-
 
     public static GameMode show(Frame parent) {
         ModeSelectDialog dialog = new ModeSelectDialog(parent);

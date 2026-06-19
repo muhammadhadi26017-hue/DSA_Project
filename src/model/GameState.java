@@ -7,12 +7,11 @@ public class GameState {
     private final Gun gun;
 
     private Player currentTurnPlayer;
-    private int currentRound;          // which round we're in (1-based)
-    private boolean doubleDamage;      // PILL effect active
+    private int currentRound;          
+    private boolean doubleDamage;      
     private boolean gameOver;
-    private Player winner;             // null until game ends
+    private Player winner;             
 
-    // Revealed bullet info (for UI message display)
     private String lastRevealMessage;
     private BulletType lastFiredBullet;
 
@@ -21,7 +20,7 @@ public class GameState {
         this.human = human;
         this.ai = ai;
         this.gun = gun;
-        this.currentTurnPlayer = human; // human always goes first
+        this.currentTurnPlayer = human; 
         this.currentRound = 1;
         this.doubleDamage = false;
         this.gameOver = false;
@@ -29,8 +28,6 @@ public class GameState {
         this.lastRevealMessage = null;
         this.lastFiredBullet = null;
     }
-
-    // --- Turn management ---
 
     public Player getCurrentTurnPlayer() {
         return currentTurnPlayer;
@@ -44,12 +41,9 @@ public class GameState {
         return currentTurnPlayer == human;
     }
 
-
     public Player getOpponent(Player player) {
         return (player == human) ? ai : human;
     }
-
-    // --- Round management
 
     public int getCurrentRound() {
         return currentRound;
@@ -58,7 +52,6 @@ public class GameState {
     public void advanceRound() {
         currentRound++;
     }
-
 
     public boolean checkGameOver() {
         if (human.getRoundsWon() >= mode.getRoundsToWin()) {
@@ -71,8 +64,6 @@ public class GameState {
         return gameOver;
     }
 
-    // --- Double damage (PILL)
-
     public boolean isDoubleDamage() {
         return doubleDamage;
     }
@@ -81,8 +72,6 @@ public class GameState {
         this.doubleDamage = doubleDamage;
     }
 
-    // --- Game over state
-
     public boolean isGameOver() {
         return gameOver;
     }
@@ -90,8 +79,6 @@ public class GameState {
     public Player getWinner() {
         return winner;
     }
-
-    // --- Last action info (for UI feedback)
 
     public String getLastRevealMessage() {
         return lastRevealMessage;
@@ -108,8 +95,6 @@ public class GameState {
     public void setLastFiredBullet(BulletType bullet) {
         this.lastFiredBullet = bullet;
     }
-
-    // --- Accessors -
 
     public GameMode getMode()  { return mode; }
     public Player getHuman()   { return human; }

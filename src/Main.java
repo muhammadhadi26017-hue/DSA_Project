@@ -4,6 +4,7 @@ import ui.GameUI;
 import ui.ModeSelectDialog;
 
 import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

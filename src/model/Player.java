@@ -22,8 +22,6 @@ public class Player {
         this.items = new ArrayList<>();
     }
 
-    // --- Charges (HP) ---
-
     public int getCharges() {
         return charges;
     }
@@ -43,8 +41,6 @@ public class Player {
     public boolean isAlive() {
         return charges > 0;
     }
-
-    // --- Items ---
 
     public List<Item> getItems() {
         return items;
@@ -66,8 +62,6 @@ public class Player {
         items.clear();
     }
 
-    // --- Turn state ---
-
     public boolean isSkipNextTurn() {
         return skipNextTurn;
     }
@@ -84,8 +78,6 @@ public class Player {
         this.hasExchangedItem = exchanged;
     }
 
-    // --- Rounds won ---
-
     public int getRoundsWon() {
         return roundsWon;
     }
@@ -94,8 +86,6 @@ public class Player {
         this.roundsWon++;
     }
 
-    // --- Identity ---
-
     public String getName() {
         return name;
     }
@@ -103,7 +93,6 @@ public class Player {
     public boolean isAI() {
         return isAI;
     }
-
 
     public void resetForNewRound(int startingCharges) {
         this.charges = startingCharges;

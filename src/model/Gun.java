@@ -23,7 +23,6 @@ public class Gun {
         this.currentIndex = 0;
     }
 
-
     public BulletType fire() {
         if (isEmpty()) return null;
         BulletType result = chamber.get(currentIndex);
@@ -31,14 +30,12 @@ public class Gun {
         return result;
     }
 
-
     public BulletType ejectCurrent() {
         if (isEmpty()) return null;
         BulletType ejected = chamber.get(currentIndex);
         currentIndex++;
         return ejected;
     }
-
 
     public BulletType peekCurrent() {
         if (isEmpty()) return null;
@@ -55,19 +52,16 @@ public class Gun {
         }
         int chosen = candidates.get(random.nextInt(candidates.size()));
         BulletType type = chamber.get(chosen);
-
+        
         return new int[]{ chosen, type.ordinal() };
     }
 
-
     public void addRandomBullet() {
         BulletType newBullet = random.nextBoolean() ? BulletType.LIVE : BulletType.BLANK;
-
+        
         int insertAt = currentIndex + random.nextInt(chamber.size() - currentIndex + 1);
         chamber.add(insertAt, newBullet);
     }
-
-    // --- Probability helpers
 
     public double blankProbability() {
         int remaining = chamber.size() - currentIndex;
@@ -79,11 +73,9 @@ public class Gun {
         return (double) blanks / remaining;
     }
 
-
     public double liveProbability() {
         return 1.0 - blankProbability();
     }
-
 
     public boolean isEmpty() {
         return currentIndex >= chamber.size();
@@ -114,9 +106,9 @@ public class Gun {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < chamber.size(); i++) {
             if (i < currentIndex) {
-                sb.append("X"); // spent
+                sb.append("X"); 
             } else {
-                sb.append("?"); // unknown
+                sb.append("?"); 
             }
             if (i < chamber.size() - 1) sb.append(" ");
         }

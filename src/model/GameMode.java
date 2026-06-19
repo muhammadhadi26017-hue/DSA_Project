@@ -4,13 +4,13 @@ public enum GameMode {
     EASY(
         "Easy",
         "Glock",
-        4,          // total bullets
-        2,          // live rounds
-        3,          // items per deal
-        3,          // starting charges (HP)
-        2,          // rounds to win
-        true,       // can exchange one item
-        0           // AI known live positions
+        4,          
+        2,          
+        3,          
+        3,          
+        2,          
+        true,       
+        0           
     ),
     NORMAL(
         "Normal",
@@ -21,7 +21,7 @@ public enum GameMode {
         4,
         2,
         false,
-        1           // AI knows 1 live position
+        1           
     ),
     HARD(
         "Hard",
@@ -32,7 +32,7 @@ public enum GameMode {
         6,
         3,
         true,
-        3           // AI knows 1 live + 2 blank positions
+        3           
     );
 
     private final String displayName;

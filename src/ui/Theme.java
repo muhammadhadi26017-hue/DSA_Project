@@ -8,14 +8,14 @@ public final class Theme {
     public static final Color BG_DEEP    = new Color(0x0D0D0D);
     public static final Color BG_PANEL   = new Color(0x141414);
     public static final Color BG_CARD    = new Color(0x1C1C1C);
-    public static final Color BG_TABLE   = new Color(0x0F1F0F); // felt green
+    public static final Color BG_TABLE   = new Color(0x0F1F0F); 
     public static final Color BG_HOVER   = new Color(0x252525);
 
     public static final Color AMBER       = new Color(0xE8A020);
     public static final Color AMBER_DIM   = new Color(0x7A5510);
     public static final Color RED_HOT     = new Color(0xC0392B);
     public static final Color GREEN_DIM   = new Color(0x2E6B3E);
-    public static final Color GREEN_FELT  = new Color(0x1A3D1A); // table felt
+    public static final Color GREEN_FELT  = new Color(0x1A3D1A); 
     public static final Color GREEN_BRIGHT= new Color(0x4CAF73);
     public static final Color TABLE_BORDER= new Color(0x3B6B3B);
 
